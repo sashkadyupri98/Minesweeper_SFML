@@ -305,8 +305,10 @@ Game::Game(RenderWindow& menu, float width, float height) {
 	ltail = 0;
 	bombsFound = 0;
 	countBombsFound = BOMBS;
+	countBomb = BOMBS;
 	countCheckFoundBombs=0;
 	countOpenCell = 0;
+	countFlag = 0;
 
 	font.loadFromFile("sansation.ttf");
 	Text text("", font, 20);
@@ -358,42 +360,44 @@ Game::Game(RenderWindow& menu, float width, float height) {
 				}
 			//Если это – правая кнопка мыши, то отображаем флажок
 				else if (e.key.code == Mouse::Right) {
+					
 					if (gridView[x][y] == 11) {
 						gridView[x][y] = 10;
-						bombsFound--;
+						countFlag--;
+						countBombsFound = countBombsFound + 1;
 					}
-					else if(gridView[x][y] > 9)
+					else if(gridView[x][y] > 9 && countFlag < countBomb)
 					{ 
 							gridView[x][y] = 11;
-							//bombsFound++;
+							countFlag++;
+							countBombsFound = countBombsFound - 1;
 						
 					}
-					//countBombsFound = BOMBS - bombsFound;
+				
 					if (gridLogic[x][y] == 9) {
 						bombsFound++;
 					}
-					countBombsFound = BOMBS - bombsFound;
+					
 				}
 		}
 
-		//Устанавливаем белый фон
-		window.clear(Color::White);
-		std::ostringstream ss;    // #include <sstream>
-		ss << countBombsFound;
-		text.setString("Mines: " + ss.str());
-		text.setPosition(0, 0);
-		window.draw(text);
+	
 
 		if (bombsFound == BOMBS) {
-			//if (checkBombsFoundLogic(x, y) == BOMBS) {
-				gameover.setString("Win");
-				gameover.setPosition(170, 150);
-				window.draw(gameover);
-				window.display();
-			//}
+			gameover.setString("Win");
+			gameover.setPosition(170, 150);
+			window.draw(gameover);
+			window.display();
 		}
 		else
 		{
+			//Устанавливаем белый фон
+			window.clear(Color::White);
+			std::ostringstream ss;    // #include <sstream>
+			ss << countBombsFound;
+			text.setString("Flags: " + ss.str());
+			text.setPosition(0, 0);
+			window.draw(text);
 			for (int i = 1; i <= LENGHT; i++) 
 			{
 				for (int j = 1; j <= WIDTH; j++) 

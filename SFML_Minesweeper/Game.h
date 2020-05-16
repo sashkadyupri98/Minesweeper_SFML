@@ -16,9 +16,9 @@ class Game
 	int gridLogic[LENGHT + 1][WIDTH + 1];
 	int gridView[LENGHT + 1][WIDTH + 1];
 	poz tail[10000];
-	int ltail, excttail, firstMove=0, bombsFound, countBombsFound, countCheckFoundBombs, countOpenCell;
+	int ltail, excttail, firstMove=0, bombsFound, countBombsFound, countCheckFoundBombs, countOpenCell, countFlag;
 	sf::Font font;
-	int countBomb =BOMBS;
+	int countBomb;
 public:
 	void initialisationGridView();
 	void bombsInitialisation(int a, int b);
