@@ -387,6 +387,8 @@ Game::Game(RenderWindow& menu, float width, float height) {
 			gameover.setString("Win");
 			gameover.setPosition(170, 150);
 			window.draw(gameover);
+			//GameOver gameover1(window.getSize().x, window.getSize().y);
+			//gameover1.Draw(window);
 			window.display();
 		}
 		else
