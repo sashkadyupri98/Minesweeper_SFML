@@ -42,16 +42,21 @@ void Menu::Draw(RenderWindow& window)
 			}
 		}
 		
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		Event e;
+		while (window.pollEvent(e))
 		{
-			if (selectedItemIndex == 0) {
-				Game game(window, window.getSize().x, window.getSize().y);
-				//game.Draw(window);
-				isMenu = false; 
-			}//если нажали первую кнопку, то выходим из меню 
-			//if (menuNum == 2) { Game(window); while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); }
-			if (selectedItemIndex == 1) { window.close(); isMenu = false; }
+			//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if (e.type == Event::MouseButtonReleased)
+			{
+				if (selectedItemIndex == 0) {
+					Game game(window, window.getSize().x, window.getSize().y);
+					//game.Draw(window);
+					isMenu = false;
+				}//если нажали первую кнопку, то выходим из меню 
+				//if (menuNum == 2) { Game(window); while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); }
+				if (selectedItemIndex == 1) { window.close(); isMenu = false; }
 
+			}
 		}
 
 		//window.clear();
